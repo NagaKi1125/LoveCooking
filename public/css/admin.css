@@ -1,0 +1,105 @@
+html {
+    scroll-behavior: smooth;
+}
+#myBtn {
+display: none;
+position: fixed;
+bottom: 20px;
+right: 30px;
+z-index: 99;
+border: none;
+outline: none;
+cursor: pointer;
+padding: 15px;
+border-radius: 10px;
+font-size: 18px;
+background-color:  rgba(66, 221, 79, .6);
+}
+#myBtn:hover {
+background-color:rgba(62, 218, 242);
+}
+body {
+overflow-x: hidden;
+}
+
+#sidebar-wrapper {
+min-height: 100vh;
+margin-left: -15rem;
+-webkit-transition: margin .25s ease-out;
+-moz-transition: margin .25s ease-out;
+-o-transition: margin .25s ease-out;
+transition: margin .25s ease-out;
+}
+
+#sidebar-wrapper .sidebar-heading {
+padding: 0.875rem 1.25rem;
+font-size: 1.2rem;
+}
+
+#sidebar-wrapper .list-group {
+width: 15rem;
+}
+
+#page-content-wrapper {
+min-width: 100vw;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+margin-left: 0;
+}
+
+@media (min-width: 768px) {
+#sidebar-wrapper {
+margin-left: 0;
+}
+
+#page-content-wrapper {
+min-width: 0;
+width: 100%;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+margin-left: -15rem;
+}
+}
+caption{
+caption-side: top;
+}
+.post-content{
+    white-space: nowrap;
+    overflow: hidden;
+    height:100px;
+    max-width:200px;
+    text-overflow: ellipsis;
+}
+.post-img{
+    vertical-align: middle;
+}
+.cate{width:100%;}
+.video-des{
+    white-space: nowrap;
+    overflow: hidden;
+    height:100px;
+    max-width:200px;
+    text-overflow: ellipsis;
+}
+/* bootstrap multi select with live search*/
+.bootstrap-select .bs-ok-default::after {
+    width: 0.3em;
+    height: 0.6em;
+    border-width: 0 0.1em 0.1em 0;
+    transform: rotate(45deg) translateY(0.5rem);
+}
+
+.btn.dropdown-toggle:focus {
+    outline: none !important;
+}
+/*END bootstrap multi select with live search*/
+/* Market management*/
+
+/*End Market management*/
+
+.dhpost{
+    word-wrap: break-word;
+    max-width:400px;
+}

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+
 use App\Http\Controllers\API\BaseController;
 use App\User;
 use Illuminate\Http\Request;
@@ -26,6 +27,10 @@ class APIRegisterController extends BaseController
             'email'=>'required|email',
             'password'=>'required',
             'c_password'=>'required|same:password',
+            'gender' =>'required',
+            'birthday'=>'required',
+            'address'=>'required',
+
         ]);
 
         if($validator->fails()){
@@ -39,6 +44,9 @@ class APIRegisterController extends BaseController
             'username' => $input['username'],
             'email' => $input['email'],
             'level' => 2,
+            'gender'=>$input['gender'],
+            'birthday'=>$input['birthday'],
+            'address'=>$input['address'],
             'dishes_liked'=> 'null',
             'password' => Hash::make($input['password']),
         ]);

@@ -17,6 +17,15 @@ class APIMenuController extends Controller
         return Menu::find($id);
     }
 
+    public function store(Request $req){
+        return Menu::create($req->all());
+    }
+
+    public function update(Request $req,$id){
+        $menu = Menu::findOrFail($id);
+        $menu->update($req->all());
+    }
+
     public function delete($id){
 
         $menu = Menu::findOrFail($id);

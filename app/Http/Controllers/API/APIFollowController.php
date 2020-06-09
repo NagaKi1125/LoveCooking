@@ -18,6 +18,15 @@ class APIFollowController extends Controller
         return Follow::find($id);
     }
 
+    public function store(Request $req){
+        return Follow::create($req->all());
+    }
+
+    public function update(Request $req, $id){
+        $follow = Follow::findOrFail($id);
+        $follow->update($req->all);
+    }
+
     public function delete($id){
 
         $follow = Follow::findOrFail($id);

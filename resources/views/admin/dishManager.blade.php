@@ -37,7 +37,7 @@
                             @endforeach
                         @endforeach
                     </td>
-                    <td><img src="{{$dish->avatar}}" width="20%"></td>
+                    <td><img src="{{ asset($dish->avatar) }}" width="20%"></td>
                     <td>{{ $dish->use }}</td>
                     @php $n = explode(PHP_EOL,$dish->material) @endphp
                     <td>

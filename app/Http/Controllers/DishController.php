@@ -35,7 +35,7 @@ class DishController extends Controller
             $i++;
             if($req->hasFile('step_imgs_'.$i)){
                 $step_img_name = $req->file('step_imgs_'.$i)->getClientOriginalName();
-                $req->file('step_imgs_'.$i)->move(public_path('upload'),$step_img_name);
+                $req->file('step_imgs_'.$i)->move('upload',$step_img_name);
                 $step_imgs_path .='upload/'.$step_img_name."_";
 
             }else $step_imgs_path.="null_";
@@ -52,7 +52,7 @@ class DishController extends Controller
         //dish image
         if($req->hasFile('avatar')){
             $avaname = $req->file('avatar')->getClientOriginalName();
-            $req->file('avatar')->move(public_path('upload'),$avaname);
+            $req->file('avatar')->move('upload',$avaname);
             $avapath = 'upload/'.$avaname;
 
         }else $avapath="no";

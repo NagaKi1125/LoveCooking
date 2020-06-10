@@ -55,6 +55,11 @@ $response = $kernel->handle(
     $request = Illuminate\Http\Request::capture()
 );
 
+// set the public path to this directory
+$app->bind('path.public', function() {
+    return __DIR__;
+});
+
 $response->send();
 
 $kernel->terminate($request, $response);

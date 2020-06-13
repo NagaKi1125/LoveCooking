@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Dish;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\DishResource;
+use App\Http\Resources\DishResources;
 
 use Illuminate\Http\Request;
 

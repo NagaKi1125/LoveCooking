@@ -17,6 +17,14 @@ class APIMarketController extends Controller
         return Market::find($id);
     }
 
+    public function store(Request $req){
+        return Market::create($req->all());
+    }
+
+    public function update(Request $req,$id){
+        $market = Market::findOrFail($id);
+        $market->update($req->all());
+    }
     public function delete($id){
 
         $market = Market::findOrFail($id);

@@ -5,7 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Category;
 use App\Http\Controllers\API\BaseController;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Category as ResourcesCategory;
+use App\Http\Resources\CategoryResources;
+
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class APICategoryController extends BaseController
 
     public function index(){
         $category = Category::all();
-        return $this->sendResponse(ResourcesCategory::collection($category),'Category retrieved successfully');
+        return $this->sendResponse(CategoryResources::collection($category),'Category retrieved successfully');
     }
 
     public function store(Request $request)
@@ -32,7 +33,7 @@ class APICategoryController extends BaseController
 
         $category = Category::create($input);
 
-        return $this->sendResponse(new ResourcesCategory($category), 'Category created successfully.');
+        return $this->sendResponse(new CategoryResources($category), 'Category created successfully.');
     }
 
     public function show($id)
@@ -43,7 +44,7 @@ class APICategoryController extends BaseController
             return $this->sendError('Category not found.');
         }
 
-        return $this->sendResponse(new ResourcesCategory($category), 'Category retrieved successfully.');
+        return $this->sendResponse(new CategoryResources($category), 'Category retrieved successfully.');
     }
 
     public function update(Request $request, $id)
@@ -61,7 +62,7 @@ class APICategoryController extends BaseController
         $category->category = $input['category'];
         $category->save();
 
-        return $this->sendResponse(new ResourcesCategory($category), 'Category updated successfully.');
+        return $this->sendResponse(new CategoryResources($category), 'Category updated successfully.');
     }
 
     public function destroy($id)

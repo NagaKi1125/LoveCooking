@@ -28,7 +28,15 @@
                 </div>
             </li>  -->
             @if (Auth::check())
-                <div class="pull-right" style="margin-top: 3px;"><a class="btn btn-primary" href="{{ route('logout') }}">Đăng xuất</a></div>
+                <div class="pull-right" style="margin-top: 3px;"><a class="btn btn-primary" href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                                  document.getElementById('logout-form').submit();">
+                     {{ __('Đăng xuất') }}
+                 </a>
+
+                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                     @csrf
+                 </form></div>
             @endif
         </ul>
 

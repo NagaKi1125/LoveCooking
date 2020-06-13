@@ -34,7 +34,7 @@ class DishController extends Controller
             //step_imgs
             $i++;
             if($req->hasFile('step_imgs_'.$i)){
-                $step_img_name = $req->file('step_imgs_'.$i)->getClientOriginalName();
+                $step_img_name = $name.$req->file('step_imgs_'.$i)->getClientOriginalName();
                 $req->file('step_imgs_'.$i)->move('upload',$step_img_name);
                 $step_imgs_path .='upload/'.$step_img_name."_";
 
@@ -51,7 +51,7 @@ class DishController extends Controller
 
         //dish image
         if($req->hasFile('avatar')){
-            $avaname = $req->file('avatar')->getClientOriginalName();
+            $avaname = $name.$req->file('avatar')->getClientOriginalName();
             $req->file('avatar')->move('upload',$avaname);
             $avapath = 'upload/'.$avaname;
 
@@ -88,6 +88,9 @@ class DishController extends Controller
         $use = $req->input('use');
         $material = $req->input('material');
 
+        //old image of steps
+        $stepimg = explode('_',$dish->step_imgs);
+
         //steps and its image
         $steps = $req->input('steps');
         $steps_arr="";
@@ -98,11 +101,11 @@ class DishController extends Controller
             //step_imgs
             $i++;
             if($req->hasFile('step_imgs_'.$i)){
-                $step_img_name = $req->file('step_imgs_'.$i)->getClientOriginalName();
+                $step_img_name = $name.$req->file('step_imgs_'.$i)->getClientOriginalName();
                 $req->file('step_imgs_'.$i)->move(public_path('upload'),$step_img_name);
                 $step_imgs_path .='upload/'.$step_img_name."_";
 
-            }else $step_imgs_path.="null_";
+            }else $step_imgs_path.=$stepimg[$i-1];
         }
 
 
@@ -115,7 +118,7 @@ class DishController extends Controller
 
         //dish image
         if($req->hasFile('avatar')){
-            $avaname = $req->file('avatar')->getClientOriginalName();
+            $avaname = $name.$req->file('avatar')->getClientOriginalName();
             $req->file('avatar')->move(public_path('upload'),$avaname);
             $avapath = 'upload/'.$avaname;
 
@@ -133,6 +136,7 @@ class DishController extends Controller
             'author'=>0,
             'liked_count'=>0,
         ]);
+
         return redirect()->route('admin.dish.index');
     }
 

@@ -15,6 +15,7 @@
                     <th scope="col">Quyền truy cập</th>
                     <th scope="col">Ngày tham gia</th>
                     <th scope="col"></th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -35,6 +36,20 @@
                                 <a class="btn btn-primary" href="{{ route('admin.user.follow',$us->id) }}">Danh sách theo dõi</a>
                                 <a class="btn btn-primary" href="{{ route('admin.user.liked',$us->id) }}">Danh sách món ăn yêu thích</a>
                             </td>
+                            @if ( $us->level != 1)
+                            <td>
+                                <form action="{{ route('admin.user.delete',[$us->id]) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <a class="btn btn-sm btn-warning" href="{{ route('admin.user.edit',[$us->id]) }}"><ion-icon name="create"></ion-icon></a>
+                                    <button type="submit" class="btn btn-sm btn-danger">
+                                        <ion-icon name="trash"></ion-icon>
+                                    </button>
+                                </form>
+                            </td>
+                            @else <td>Adminstrator</td>
+                            @endif
+
                         </tr>
                 @endforeach
             </tbody>

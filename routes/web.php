@@ -26,6 +26,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix'=>'admin','middleware'=>'auth','as'=>'admin.'], function(){
     //user manager
     Route::get('/','AdminController@index')->name('index');
+
+    Route::group(['prefix'=>'user','as'=>'user.'], function(){
+        Route::put('{id}','UserController@update')->name('update');
+        Route::get('{id}/edit','UserController@edit')->name('edit');
+        Route::delete('{id}','UserController@delete')->name('delete');
+    });
     //liked list
     Route::get('user/{id}/liked-list','AdminController@userLikedList')->name('user.liked');
     //follow list

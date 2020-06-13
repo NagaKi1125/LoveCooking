@@ -4,10 +4,10 @@
 @if(Auth::check())
 @if(Auth::user()->level==1)
 <div class="container">
-    <div class="text-center"><h3>Thêm một món mới</h3></div>
+    <div class="text-center"><h3>Chỉnh sửa món ăn</h3></div>
     <div class="row justify-content-center">
         <div class="col-md-10">
-            <form method="POST" action="{{ route('admin.dish.edit',[$dish->id]) }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('admin.dish.update',[$dish->id]) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="form-group row">
@@ -15,7 +15,7 @@
 
                     <div class="col-md-10">
                         <input id="dish_name" type="text" class="form-control @error('dish_name') is-invalid @enderror"
-                         name="dish_name" value="{{ $dish->dish_name }}"   autocomplete="dish_name"
+                         name="dish_name" value="{{ $dish->dish_name }}"  required autocomplete="dish_name"
                          placeholder="Nhập tên món ăn" autofocus>
 
                         @error('dish_name')
@@ -47,8 +47,8 @@
 
                     <div class="col-md-10">
                         <textarea rows="4" id="description" type="text" class="form-control @error('description') is-invalid @enderror"
-                         name="description" value="{{ $dish->description }}"   autocomplete="description"
-                         placeholder="Nhập mô tả " autofocus></textarea>
+                         name="description" required autocomplete="description"
+                         placeholder="Nhập mô tả " autofocus>{{ $dish->description }}</textarea>
 
                         @error('description')
                             <span class="invalid-feedback" role="alert">
@@ -63,7 +63,7 @@
 
                     <div class="col-md-10">
                         <input id="use" type="text" class="form-control @error('use') is-invalid @enderror"
-                         name="use" value="{{ $dish->use }}"   autocomplete="use"
+                         name="use" value="{{ $dish->use }}"  required autocomplete="use"
                          placeholder="Nhập công dụng" autofocus>
 
                         @error('use')
@@ -78,11 +78,11 @@
                         <div class="form-group row">
                             <label>Nguyên liệu</label>
                             <textarea rows="10" id="material" type="text" class="form-control @error('material') is-invalid @enderror"
-                                name="material" value="{{ $dish->material }}"   autocomplete="material"
+                                name="material" required   autocomplete="material"
                                 placeholder="Nhập nguyên liệu cần dùng
 Nguyên liệu 1: bao nhiêu ?
 Nguyên liệu 2: bao nhiêu ?
-" autofocus></textarea>
+" autofocus>{{ $dish->material }}</textarea>
 
                             @error('material')
                                 <span class="invalid-feedback" role="alert">
@@ -92,7 +92,7 @@ Nguyên liệu 2: bao nhiêu ?
                         </div>
                         <div class="form-group row">
                             <label>{{ __('Loại món') }}</label>
-                            <select multiple="multiple" id="category"  name="category[]" class="selectpicker" data-live-search="true">
+                            <select multiple="multiple" id="category"  name="category[]" class="selectpicker" required data-live-search="true">
                                 @php $dishcate = explode('_',$dish->cate_id);  $caid=1;@endphp
                                 @foreach ($cate as $cate)
                                     @foreach($dishcate as $dica)
@@ -115,7 +115,7 @@ Nguyên liệu 2: bao nhiêu ?
                             @if($i<=2)
                                 <div>
                                     <label>Bước {{ $i }}:</label>
-                                    <input id="steps_{{ $i }}" type="text" accept="image/*" class="form-control" name="steps[]"   autocomplete="steps"
+                                    <input id="steps_{{ $i }}" type="text" accept="image/*" class="form-control" name="steps[]" required autocomplete="steps"
                                         placeholder="Bước {{ $i }}" value="{{ $steps[$add] }}" autofocus>
                                     <input id="step_imgs_{{ $i }}" type="file" accept="image/*"
                                         name="step_imgs_{{ $i }}" autofocus onchange="readURLSteps_{{ $i }}(this)">

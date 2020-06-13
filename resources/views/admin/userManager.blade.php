@@ -13,6 +13,9 @@
                     <th scope="col">Tên tài khoản</th>
                     <th scope="col">E-Mail</th>
                     <th scope="col">Quyền truy cập</th>
+                    <th scope="col">Giới tính</th>
+                    <th scope="col">Ngày sinh</th>
+                    <th scope="col">Địa chỉ</th>
                     <th scope="col">Ngày tham gia</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
@@ -20,7 +23,9 @@
             </thead>
             <tbody>
                 @foreach($users as $us)
-                        <tr>
+
+                        @if($us->level ==0) <tr class="table-dark"> @else <tr> @endif
+
                             <th scope="row">{{ $us->id }}</th>
                             <td>{{ $us->name }}</td>
                             <td>{{ $us->username }}</td>
@@ -31,6 +36,11 @@
                                 @else <span class="">Tài khoản bị vô hiệu
                                 @endif </span>
                             </td>
+                            <td>
+                                @if($us->gender == 1)  Nữ  @else Nam  @endif
+                            </td>
+                            <td>{{ $us->birthday }}</td>
+                            <td>{{ $us->address }}</td>
                             <td>{{ carbon\carbon::parse($us->created_at)->toDateString() }}</td>
                             <td>
                                 <a class="btn btn-primary" href="{{ route('admin.user.follow',$us->id) }}">Danh sách theo dõi</a>

@@ -10,8 +10,8 @@ use Illuminate\Http\Request;
 class APIUserController extends Controller
 {
     public function index(){
-        $user = User::all();
-        return UserResources::collection($user);
+        return User::all();
+        //return UserResources::collection($user);
     }
 
     public function show($id)

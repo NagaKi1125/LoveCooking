@@ -37,7 +37,7 @@ class DishResources extends JsonResource
 
         return [
             'id'=>$this->id,
-            'dish_name'=>$this->id,
+            'dish_name'=>$this->dish_name,
             'cate_id'=>$cate_list,
             'avatar'=>$this->avatar,
             'description'=>$this->description,

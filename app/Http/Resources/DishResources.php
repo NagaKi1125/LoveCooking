@@ -22,7 +22,7 @@ class DishResources extends JsonResource
         $usercmt = DB::table('comments')
             ->join('users','comments.user_id','=','users.id')
             ->join('dishes','comments.dish_id','=','dishes.id')
-            ->select('users.name','dishes.dish_name','comments.*')
+            ->select('users.name','comments.id','comments.comment','comments.created_at','comments.updated_at')
             ->where('dish_id',$this->id)->get();
         $cate_id = explode('_',$this->cate_id);
         $cate_list ="";

@@ -29,17 +29,7 @@ class UserResources extends JsonResource
             }
         }
 
-        $dish_liked = DB::table('user_liked_lists')->select('dish_id_list')->where('user_id',$this->id)->get();
-        $dish_list = explode('_',$dish_liked);
-        $dish = Dish::all();
-        $dish_liked_list = "";
-        foreach($dish_list as $dili){
-            foreach($dish as $di){
-                if($dili == $di->id){
-                    $dish_liked_list.=$di->dish_name."_";
-                }
-            }
-        }
+        $dish_liked = DB::table('user_liked_lists')->select('id')->where('user_id',$this->id)->get();
 
         return [
             'id'=>$this->id,
@@ -52,7 +42,7 @@ class UserResources extends JsonResource
             'password'=>$this->password,
             'level'=>$this->level,
             'follow_list_names'=>$follow_list,
-            'dish_liked_list'=>$dish_liked_list,
+            'dish_liked_list'=>$dish_liked,
             'created_at'=>(String)$this->created_at,
             'updated_at'=>(String)$this->updated_at,
         ];

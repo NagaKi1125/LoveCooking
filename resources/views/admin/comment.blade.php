@@ -31,7 +31,7 @@
                                     @endif
                                 @endforeach
                             </td>
-                            <td>{{ $smt->comment }}</td>
+                            <td>{{ $cmt->comment }}</td>
                             <td>{{ carbon\carbon::parse($cmt->updated_at)->toDateTimeString() }}</td>
                             <td>
 

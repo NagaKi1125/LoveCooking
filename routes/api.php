@@ -15,12 +15,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('register', 'API\APIRegisterController@register');
-Route::post('login', 'API\APIRegisterController@login');
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('register', 'API\APIAuthController@register');
+Route::post('login', 'API\APIAuthController@login');
+
+Route::group(['middleware' => 'jwt.auth'], function () {
+    Route::get('auth', 'API\APIAuthController@user');
+    Route::post('logout', 'API\APIAuthController@logout');
 });
+
+
+Route::middleware('jwt.refresh')->get('/token/refresh', 'API\APIAuthController@refresh');
 
 //categories
 Route::get('categories','API\APICategoryController@index');

@@ -14,6 +14,30 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class APIAuthController extends Controller
 {
+     /**
+     * @var bool
+     */
+    public $loginAfterSignUp = true;
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+
+    public function login(Request $req){
+        $credentials = $req->only('email','password');
+        $token = null;
+        if(!$token = JWTAuth::attempt($credentials)){
+            return response()->json([
+                'status' => 'false',
+                'message' => 'Invalid Email or Password',
+            ], Response::HTTP_BAD_REQUEST);
+        }
+
+        return response()->json(['token'=>$token],Response::HTTP_OK);
+    }
+
+
     public function register(RegisterFormRequest $req){
         $params =$req->only('email','name','password','username','gender','address','birthday');
         $user = New User();
@@ -31,18 +55,6 @@ class APIAuthController extends Controller
         return response()->json($user,Response::HTTP_OK);
     }
 
-    public function login(Request $req){
-        $credentials = $req->only('email','password');
-        if(!$token = JWTAuth::attempt($credentials)){
-            return response()->json([
-                'status' => 'error',
-                'error' => 'invalid.credentials',
-                'msg' => 'Invalid Credentials.',
-            ], Response::HTTP_BAD_REQUEST);
-        }
-
-        return response()->json(['token'=>$token],Response::HTTP_OK);
-    }
 
     public function user(Request $req)
     {

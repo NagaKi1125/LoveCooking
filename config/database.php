@@ -46,7 +46,7 @@ return [
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', 'phpmyadmin.co'), //db4free.net
+            'host' => env('DB_HOST', 'sql12.freemysqlhosting.net'), //db4free.net
             'port' => env('DB_PORT', '3306'),
             'database' => env('DB_DATABASE', 'sql12350333'), //lovecookingdb
             'username' => env('DB_USERNAME', 'sql12350333'), //adminlovecooking

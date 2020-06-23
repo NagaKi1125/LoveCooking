@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResources;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class APIUserController extends Controller
 {
@@ -16,7 +17,8 @@ class APIUserController extends Controller
 
     public function show($id)
     {
-        return User::find($id);
+        $user =  Auth::user();
+        return UserResources::collection($user);
     }
 
     public function delete($id){

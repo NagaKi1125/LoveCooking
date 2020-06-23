@@ -22,6 +22,8 @@ Route::post('login', 'API\APIAuthController@login');
 Route::group(['middleware' => 'jwt.auth'], function () {
     Route::get('auth', 'API\APIAuthController@user');
     Route::get('logout', 'API\APIAuthController@logout');
+    //follow and dish liked
+    Route::get('menu-follow-liked','API\APIMenuFollowLikedController@show');
 });
 
 Route::middleware('jwt.refresh')->get('/token/refresh', 'API\APIAuthController@refresh');
@@ -69,16 +71,5 @@ Route::post('menus', 'API\APIMenuController@store');
 Route::put('menus/{id}', 'API\APIMenuController@update');
 Route::delete('menus/{id}', 'API\APIMenuController@delete');
 
-//follow
-Route::get('follow', 'API\APIFollowController@index');
-Route::get('follow/{id}', 'API\APIFollowController@show');
-Route::post('follow', 'API\APIFollowController@store');
-Route::put('follow/{id}', 'API\APIFollowController@update');
-Route::delete('follow/{id}', 'API\APIFollowController@delete');
 
-//user-liked-list
-Route::get('user-liked-list', 'API\APIUserLikedListController@index');
-Route::get('user-liked-list/{id}', 'API\APIUserLikedListController@show');
-Route::post('user-liked-list', 'API\APIUserLikedListController@store');
-Route::put('user-liked-list/{id}', 'API\APIUserLikedListController@update');
-Route::delete('user-liked-list/{id}', 'API\APIUserLikedListController@delete');
+

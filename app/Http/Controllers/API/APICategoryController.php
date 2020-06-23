@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 class APICategoryController extends BaseController
 {
 
+
     public function index(){
         $category = Category::all();
         return $this->sendResponse(CategoryResources::collection($category),'Category retrieved successfully');

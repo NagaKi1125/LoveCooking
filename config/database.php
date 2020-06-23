@@ -46,11 +46,11 @@ return [
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', 'db4free.net'),
+            'host' => env('DB_HOST', 'https://demo.phpmyadmin.net/'), //db4free.net
             'port' => env('DB_PORT', '3306'),
             'database' => env('DB_DATABASE', 'lovecookingdb'),
-            'username' => env('DB_USERNAME', 'adminlovecooking'),
-            'password' => env('DB_PASSWORD', 'admin123'),
+            'username' => env('DB_USERNAME', 'root'), //adminlovecooking
+            'password' => env('DB_PASSWORD', ''),//admin123
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',

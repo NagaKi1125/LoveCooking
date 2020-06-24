@@ -56,8 +56,8 @@ class MenuFollowLikedResources extends JsonResource
         }
 
         //user's follow list
-        $follow = DB::table('follows')->select('follow_id_list')->where('user_id',$this->id)->get();
-        $fo_list = explode('"',$follow);
+        $follow = DB::table('follows')->select('follow_id_list')->where('user_id',$this->id)->first();
+       /* $fo_list = explode('"',$follow);
         $fo_list = explode('_',$fo_list[3]);
         $follow_list = "";
         $user = User::all();
@@ -67,7 +67,7 @@ class MenuFollowLikedResources extends JsonResource
                     $follow_list.=$us->name."_";
                 }
             }
-        }
+        }*/
 
 
         //user's dishes liked
@@ -85,7 +85,7 @@ class MenuFollowLikedResources extends JsonResource
         return [
             'id'=>$this->id,
             'name'=>$this->name,
-            'follow_list_names'=>$follow_list,
+            'follow_list_names'=>$follow,
             'dish_liked_list'=>$dish_liked_list,
             'menu_list'=>[
                 'breakfast_list'=>$br_list,

@@ -13,7 +13,7 @@ class APIMenuController extends Controller
 {
     public function show(){
         $user = Auth::user();
-        $menu = DB::table('menus')->select('menus.*')->where('user_id',$user->id)->get();
+        $menu = DB::table('menus')->where('user_id',$user->id)->get();
         return new MenuResources($menu);
     }
 

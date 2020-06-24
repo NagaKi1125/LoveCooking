@@ -18,7 +18,7 @@ class APIUserController extends Controller
     public function show($id)
     {
         $user =  Auth::user();
-        return UserResources::collection($user);
+        return new UserResources($user);
     }
 
     public function delete($id){

@@ -57,8 +57,8 @@ class MenuFollowLikedResources extends JsonResource
 
         //user's follow list
         $follow = DB::table('follows')->select('follow_id_list')->where('user_id',$this->id)->first();
-       /* $fo_list = explode('"',$follow);
-        $fo_list = explode('_',$fo_list[3]);
+        //$fo_list = explode('_',$follow);
+        /*$fo_list = explode('_',$fo_list[3]);
         $follow_list = "";
         $user = User::all();
         foreach($fo_list as $fli){
@@ -71,8 +71,8 @@ class MenuFollowLikedResources extends JsonResource
 
 
         //user's dishes liked
-        $dish_liked = DB::table('user_liked_lists')->select('dish_id_list')->where('user_id',$this->id)->get();
-        $dish_list = explode('"',$dish_liked);
+        $dish_liked = DB::table('user_liked_lists')->select('dish_id_list')->where('user_id',$this->id)->first();
+        /*$dish_list = explode('"',$dish_liked);
         $di_list = explode('_',$dish_list[3]);
         $dish_liked_list = "";
         foreach($di_list as $dili){
@@ -81,12 +81,12 @@ class MenuFollowLikedResources extends JsonResource
                     $dish_liked_list.=$di->dish_name."_";
                 }
             }
-        }
+        }*/
         return [
             'id'=>$this->id,
             'name'=>$this->name,
             'follow_list_names'=>$follow,
-            'dish_liked_list'=>$dish_liked_list,
+            'dish_liked_list'=>$dish_liked,
             'menu_list'=>[
                 'breakfast_list'=>$br_list,
                 'lunch_list'=>$lun_list,

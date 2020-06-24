@@ -18,7 +18,7 @@ class DishResources extends JsonResource
     public function toArray($request)
     {
 
-        $dishhis = DB::table('dish_histories')->where('dish_id',$this->id)->pluck('dh_posts')[0];
+        $dishhis = DB::table('dish_histories')->select('dish_histories.dh_posts')->where('dish_id',$this->id)->get();
         $usercmt = DB::table('comments')
             ->join('users','comments.user_id','=','users.id')
             ->join('dishes','comments.dish_id','=','dishes.id')

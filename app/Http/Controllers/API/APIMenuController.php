@@ -6,18 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\MenuResources;
 use App\Menu;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class APIMenuController extends Controller
 {
-    public function index(){
-        $menu = Menu::all();
-        return MenuResources::collection($menu);
-    }
-
-    public function show($id)
-    {
-        return Menu::find($id);
+    public function show(){
+        $user = Auth::user();
+        $menu = DB::table('menus')->select('menus.*')->where('user_id',$user->id)->get();
+        return new MenuResources($menu);
     }
 
     public function store(Request $req){

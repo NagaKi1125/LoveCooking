@@ -20,41 +20,7 @@ class MenuFollowLikedResources extends JsonResource
      */
     public function toArray($request)
     {
-        //User's Menu
-        $menuBreakfast = DB::table('menus')->where('user_id',$this->id)->pluck('breakfast_list')[0];
-        $menuLunch = DB::table('menus')->where('user_id',$this->id)->pluck('lunch_list')[0];
-        $menuDinner = DB::table('menus')->where('user_id',$this->id)->pluck('dinner_list')[0];
-        $br_id = explode('_',$menuBreakfast);    //$br_id = explode('_',$br_id[3]);
-        $lun_id = explode('_',$menuLunch); // $lun_id = explode('_',$lun_id[3]);
-        $din_id = explode('_',$menuDinner); //$din_id = explode('_',$din_id[3]);
-        $br_list = $lun_list = $din_list ="";
-
-        $dishes = DB::table('dishes')->get();
-        //breakfast
-        foreach($br_id as $bri){
-            foreach($dishes as $dish){
-                if($bri == $dish->id){
-                    $br_list.=$dish->dish_name."_";
-                }
-            }
-        }
-        //lunch
-        foreach($lun_id as $lui){
-            foreach($dishes as $dish){
-                if($lui == $dish->id){
-                    $lun_list.=$dish->dish_name."_";
-                }
-            }
-        }
-        //dinner
-        foreach($din_id as $din){
-            foreach($dishes as $dish){
-                if($din == $dish->id){
-                    $din_list.=$dish->dish_name."_";
-                }
-            }
-        }
-
+        $dishes = Dish::all();
         //user's follow list
         $follow = DB::table('follows')->where('user_id',$this->id)->pluck('follow_id_list')[0];
         $fo_list = explode('_',$follow);
@@ -87,11 +53,6 @@ class MenuFollowLikedResources extends JsonResource
             'name'=>$this->name,
             'follow_list_names'=>$follow_list,
             'dish_liked_list'=>$dish_liked_list,
-            'menu_list'=>[
-                'breakfast_list'=>$br_list,
-                'lunch_list'=>$lun_list,
-                'dinner_list'=>$din_list,
-            ]
         ];
     }
 }

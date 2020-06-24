@@ -23,7 +23,8 @@ Route::group(['middleware' => 'jwt.auth'], function () {
     Route::get('auth', 'API\APIAuthController@user');
     Route::get('logout', 'API\APIAuthController@logout');
     //follow and dish liked
-    Route::get('menu-follow-liked','API\APIMenuFollowLikedController@show');
+    Route::get('follow-liked','API\APIMenuFollowLikedController@show');
+    Route::get('user-menu','API\APIMenuController@show');
 });
 
 Route::middleware('jwt.refresh')->get('/token/refresh', 'API\APIAuthController@refresh');

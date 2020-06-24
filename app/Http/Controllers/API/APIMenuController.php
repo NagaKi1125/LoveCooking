@@ -14,7 +14,7 @@ class APIMenuController extends Controller
     public function show(){
         $user = Auth::user();
         $menu = DB::table('menus')->where('user_id',$user->id)->get();
-        return new MenuResources($menu);
+        return MenuResources::collection($menu);
     }
 
     public function store(Request $req){

@@ -47,7 +47,7 @@ class MenuResources extends JsonResource
         }
         return [
             'id'=>$this->id,
-            'user_id'=>$this->id,
+            'user_id'=>$this->user_id,
             'menu_date'=>$this->menu_date,
             'breakfast_list'=>$br_list,
             'lunch_list'=>$lun_list,

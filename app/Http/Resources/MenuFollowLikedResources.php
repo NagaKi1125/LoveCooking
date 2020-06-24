@@ -27,7 +27,7 @@ class MenuFollowLikedResources extends JsonResource
         $br_id = explode('_',$menuBreakfast);    //$br_id = explode('_',$br_id[3]);
         $lun_id = explode('_',$menuLunch); // $lun_id = explode('_',$lun_id[3]);
         $din_id = explode('_',$menuDinner); //$din_id = explode('_',$din_id[3]);
-        /*$br_list = $lun_list = $din_list ="";
+        $br_list = $lun_list = $din_list ="";
 
         $dishes = DB::table('dishes')->get();
         //breakfast
@@ -53,12 +53,12 @@ class MenuFollowLikedResources extends JsonResource
                     $din_list.=$dish->dish_name."_";
                 }
             }
-        }*/
+        }
 
         //user's follow list
         $follow = DB::table('follows')->where('user_id',$this->id)->pluck('follow_id_list')[0];
         $fo_list = explode('_',$follow);
-        /*$fo_list = explode('_',$fo_list[3]);
+        //$fo_list = explode('_',$fo_list[3]);
         $follow_list = "";
         $user = User::all();
         foreach($fo_list as $fli){
@@ -67,30 +67,30 @@ class MenuFollowLikedResources extends JsonResource
                     $follow_list.=$us->name."_";
                 }
             }
-        }*/
+        }
 
 
         //user's dishes liked
         $dish_liked = DB::table('user_liked_lists')->where('user_id',$this->id)->pluck('dish_id_list')[0];
         $dish_list = explode('_',$dish_liked);
-        /*$di_list = explode('_',$dish_list[3]);
+        //$di_list = explode('_',$dish_list[3]);
         $dish_liked_list = "";
-        foreach($di_list as $dili){
+        foreach($dish_list as $dili){
             foreach($dishes as $di){
                 if($dili == $di->id){
                     $dish_liked_list.=$di->dish_name."_";
                 }
             }
-        }*/
+        }
         return [
             'id'=>$this->id,
             'name'=>$this->name,
-            'follow_list_names'=>$fo_list,
-            'dish_liked_list'=>$dish_list,
+            'follow_list_names'=>$follow_list,
+            'dish_liked_list'=>$dish_liked_list,
             'menu_list'=>[
-                'breakfast_list'=>$br_id,
-                'lunch_list'=>$lun_id,
-                'dinner_list'=>$din_id,
+                'breakfast_list'=>$br_list,
+                'lunch_list'=>$lun_list,
+                'dinner_list'=>$din_list,
             ]
         ];
     }

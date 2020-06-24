@@ -18,7 +18,8 @@ class APIDishController extends Controller
 
     public function show($id)
     {
-        return Dish::find($id);
+        $dish = Dish::find($id);
+        return new DishResources($dish);
     }
 
     public function delete($id){

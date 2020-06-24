@@ -15,6 +15,7 @@ class MenuResources extends JsonResource
      */
     public function toArray($request)
     {
+
         $br_id = explode('_',$this->breakfast_list);
         $lun_id = explode('_',$this->lunch_list);
         $din_id = explode('_',$this->dinner_list);
@@ -24,7 +25,7 @@ class MenuResources extends JsonResource
         foreach($br_id as $bri){
             foreach($dishes as $dish){
                 if($bri == $dish->id){
-                    $br_list.=$dish->dish_name."_";
+                    $br_list.=$dish->dish_name."+".$dish->id."_";
                 }
             }
         }
@@ -32,7 +33,7 @@ class MenuResources extends JsonResource
         foreach($lun_id as $lui){
             foreach($dishes as $dish){
                 if($lui == $dish->id){
-                    $lun_list.=$dish->dish_name."_";
+                    $lun_list.=$dish->dish_name."+".$dish->id."_";
                 }
             }
         }
@@ -40,7 +41,7 @@ class MenuResources extends JsonResource
         foreach($din_id as $din){
             foreach($dishes as $dish){
                 if($din == $dish->id){
-                    $din_list.=$dish->dish_name."_";
+                    $din_list.=$dish->dish_name."+".$dish->id."_";
                 }
             }
         }

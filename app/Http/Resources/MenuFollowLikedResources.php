@@ -20,7 +20,8 @@ class MenuFollowLikedResources extends JsonResource
      */
     public function toArray($request)
     {
-        $dishes = Dish::all();
+        $dishes = DB::table('dishes')->get();
+
         //user's follow list
         $follow = DB::table('follows')->where('user_id',$this->id)->pluck('follow_id_list')[0];
         $fo_list = explode('_',$follow);

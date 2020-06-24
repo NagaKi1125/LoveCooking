@@ -15,7 +15,7 @@ class APIUserController extends Controller
         return UserResources::collection($user);
     }
 
-    public function show($id)
+    public function show()
     {
         $user =  Auth::user();
         return new UserResources($user);

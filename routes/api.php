@@ -25,6 +25,7 @@ Route::group(['middleware' => 'jwt.auth'], function () {
     //follow and dish liked
     Route::get('follow-liked','API\APIMenuFollowLikedController@show');
     Route::get('user-menu','API\APIMenuController@show');
+    Route::get('user-info', 'API\APIUserController@show');
 });
 
 Route::middleware('jwt.refresh')->get('/token/refresh', 'API\APIAuthController@refresh');
@@ -53,7 +54,6 @@ Route::delete('dishes/{id}', 'API\APIDishController@delete');
 
 //user
 Route::get('users', 'API\APIUserController@index');
-Route::get('users/{id}', 'API\APIUserController@show');
 Route::post('users', 'API\APIUserController@store');
 Route::put('users/{id}', 'API\APIUserController@update');
 Route::delete('users/{id}', 'API\APIUserController@delete');

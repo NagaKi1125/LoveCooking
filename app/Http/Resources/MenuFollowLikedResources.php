@@ -31,7 +31,7 @@ class MenuFollowLikedResources extends JsonResource
         foreach($fo_list as $fli){
             foreach($user as $us){
                 if($fli == $us->id){
-                    $follow_list.=$us->name."_";
+                    $follow_list.=$us->id."+".$us->name."_";
                 }
             }
         }
@@ -45,7 +45,7 @@ class MenuFollowLikedResources extends JsonResource
         foreach($dish_list as $dili){
             foreach($dishes as $di){
                 if($dili == $di->id){
-                    $dish_liked_list.=$di->dish_name."_";
+                    $dish_liked_list.=$di->id."+".$di->dish_name."+".$di->avatar."_";
                 }
             }
         }

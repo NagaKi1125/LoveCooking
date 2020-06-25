@@ -25,7 +25,7 @@ class MenuResources extends JsonResource
         foreach($br_id as $bri){
             foreach($dishes as $dish){
                 if($bri == $dish->id){
-                    $br_list.=$dish->dish_name."+".$dish->id."_";
+                    $br_list.=$dish->id."+".$dish->dish_name."+".$dish->avatar."_";
                 }
             }
         }
@@ -33,7 +33,7 @@ class MenuResources extends JsonResource
         foreach($lun_id as $lui){
             foreach($dishes as $dish){
                 if($lui == $dish->id){
-                    $lun_list.=$dish->dish_name."+".$dish->id."_";
+                    $lun_list.=$dish->id."+".$dish->dish_name."+".$dish->avatar."_";
                 }
             }
         }
@@ -41,7 +41,7 @@ class MenuResources extends JsonResource
         foreach($din_id as $din){
             foreach($dishes as $dish){
                 if($din == $dish->id){
-                    $din_list.=$dish->dish_name."+".$dish->id."_";
+                    $din_list.=$dish->id."+".$dish->dish_name."+".$dish->avatar."_";
                 }
             }
         }

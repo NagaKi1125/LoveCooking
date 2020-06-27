@@ -8,11 +8,12 @@ use App\Http\Resources\DishResources;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class APIDishController extends Controller
 {
     public function index(){
-        $dish = Dish::all();
+        $dish = DB::table('dishes')->where('checked','1')->get();
         return DishResources::collection($dish);
     }
 

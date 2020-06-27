@@ -14,6 +14,7 @@
     <div class="list-group list-group-flush">
         <a href="{{ route('admin.index') }}" class="list-group-item list-group-item-action bg-light">Quản lí Users</a>
         <a href="{{ route('admin.dish.index') }}" class="list-group-item list-group-item-action bg-light">Danh sách món ăn</a>
+        <a href="{{ route('admin.dish.check.index') }}" class="list-group-item list-group-item-action bg-light">Công thức chờ duyệt</a>
         <a href="{{ route('admin.comment.index') }}" class="list-group-item list-group-item-action bg-light">Bình luận về món</a>
         <a href="{{ route('admin.history.index') }}" class="list-group-item list-group-item-action bg-light">Lịch sử phát triển món ăn</a>
         <a href="{{ route('admin.menu.index') }}" class="list-group-item list-group-item-action bg-light">Thực đơn</a>

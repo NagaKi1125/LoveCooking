@@ -25,6 +25,7 @@ class CreateDishesTable extends Migration
             $table->string('step_imgs');
             $table->integer('author');
             $table->integer('liked_count');
+            $table->integer('checked');
             $table->timestamps();
         });
     }

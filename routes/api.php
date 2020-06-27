@@ -26,6 +26,11 @@ Route::group(['middleware' => 'jwt.auth'], function () {
     Route::get('follow-liked','API\APIMenuFollowLikedController@show');
     Route::get('user-menu','API\APIMenuController@show');
     Route::get('user-info', 'API\APIUserController@show');
+
+    //dishes
+    Route::post('dishes', 'API\APIDishController@store');
+    Route::put('dishes/{id}', 'API\APIDishController@update');
+    Route::delete('dishes/{id}', 'API\APIDishController@delete');
 });
 
 Route::middleware('jwt.refresh')->get('/token/refresh', 'API\APIAuthController@refresh');
@@ -44,13 +49,9 @@ Route::post('markets', 'API\APIMarketController@store');
 Route::put('markets/{id}', 'API\APIMarketController@update');
 Route::delete('markets/{id}', 'API\APIMarketController@delete');
 
-
 //dish
 Route::get('dishes', 'API\APIDishController@index');
 Route::get('dishes/{id}', 'API\APIDishController@show');
-Route::post('dishes', 'API\APIDishController@store');
-Route::put('dishes/{id}', 'API\APIDishController@update');
-Route::delete('dishes/{id}', 'API\APIDishController@delete');
 
 //user
 Route::get('users', 'API\APIUserController@index');

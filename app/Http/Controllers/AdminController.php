@@ -24,7 +24,7 @@ class AdminController extends Controller
     }
 
     public function dishIndex(){
-        $dish = DB::table('dishes')->get();
+        $dish = DB::table('dishes')->where('checked','1')->get();
         $cate = DB::table('categories')->get();
         return view('admin.dishManager',['dish'=>$dish,'cate'=>$cate]);
     }

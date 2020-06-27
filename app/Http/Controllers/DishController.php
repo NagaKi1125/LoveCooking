@@ -41,7 +41,6 @@ class DishController extends Controller
             }else $step_imgs_path.="null_";
         }
 
-
         //categories
         $cate_id = $req->input('category');
         $cate_arr="";
@@ -69,6 +68,7 @@ class DishController extends Controller
             'step_imgs'=>$step_imgs_path,
             'author'=>0,
             'liked_count'=>0,
+            'checked'=>1,
         ]);
 
         return redirect()->route('admin.dish.index');
@@ -139,6 +139,7 @@ class DishController extends Controller
 
         return redirect()->route('admin.dish.index');
     }
+
 
     public function delete($id){
         $post =Dish::find($id);

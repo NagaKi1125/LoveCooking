@@ -65,6 +65,11 @@ Route::group(['prefix'=>'admin','middleware'=>'auth','as'=>'admin.'], function()
         Route::delete('{id}','DishController@delete')->name('delete');
     });
 
+    Route::group(['prefix'=>'dish-check','as'=>'dish.check.'],function(){
+        Route::get('','DishCheckController@index')->name('index');
+        Route::put('{id}/check','DishCheckController@check')->name('checked');
+    });
+
     //comment
     Route::group(['prefix'=>'comment','as'=>'comment.'],function(){
         Route::get('','AdminController@cmtIndex')->name('index');

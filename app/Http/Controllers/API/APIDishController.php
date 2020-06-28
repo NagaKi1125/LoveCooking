@@ -28,21 +28,28 @@ class APIDishController extends Controller
         $user = Auth::user();
         $dish = new Dish();
         $params = $request->only('dish_name','cate_id','avatar',
-                'description','use','material','steps','step_imgs','author','liked_count');
+                'description','use','material','steps','step_imgs');
 
-        $dish->create([
-            'dish_name'=>$params['dish_name'],
-            'cate_id'=>$params['cate_id'],
-            'avatar'=>'none',
-            'description'=>$params['description'],
-            'use'=>$params['use'],
-            'material'=>$params['material'],
-            'steps'=>'none',
-            'step_imgs'=>'none',
-            'author'=>$user->id,
-            'liked_count'=>0,
-            'checked'=>0,
-        ]);
+        if($request->hasFile('avatar')){
+            $avaname = $params['dish_name'].$request->file('avatar')->getClientOriginalName();
+            $request->file('avatar')->move('upload',$avaname);
+            $avapath = 'upload/'.$avaname;
+
+        }else $avapath="no";
+
+        $dish->dish_name = $params['dish_name'];
+        $dish->cate_id = $params['cate_id'];
+        $dish->avatar = $avapath;
+        $dish->description = $params['description'];
+        $dish->use = $params['use'];
+        $dish->material = $params['material'];
+        $dish->steps = $params['steps'];
+        $dish->step_imgs = 'none';
+        $dish->author = $user->id;
+        $dish->liked_count = 0;
+        $dish->checked = 0;
+
+        $dish->save();
 
         return new DishResources($dish);
     }

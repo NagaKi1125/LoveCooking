@@ -60,7 +60,14 @@
                             @csrf
                             @method('PUT')
                             <button type="submit" class="btn btn-sm btn-warning">
-                                Chờ duyệt
+                                Duyệt
+                            </button>
+                        </form>
+                        <form action="{{ route('admin.dish.check.delete',[$dish->id]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger">
+                                Xóa
                             </button>
                         </form>
                     </td>

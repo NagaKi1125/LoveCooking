@@ -22,4 +22,10 @@ class DishCheckController extends Controller
 
         return redirect()->route('admin.dish.check.index');
     }
+
+    public function delete($id){
+        $dish = Dish::find($id);
+        $dish->delete();
+        return redirect()->route('admin.dish.check.index');
+    }
 }

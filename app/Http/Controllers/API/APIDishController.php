@@ -69,49 +69,6 @@ class APIDishController extends Controller
         return new DishResources($dish);
     }
 
-    public function love($id){
-        $user = Auth::user()->id;
-        $userLoveDish = UserLikedList::find($user);
-        $dish = Dish::find($id);
-
-        $dish->update([
-            'love' => $dish->liked_count++,
-        ]);
-        $check=0;
-        $lovedish = explode("_",$userLoveDish->dish_id_list);
-        foreach($lovedish as $ld){
-            if($ld == $dish->id){
-                $check++;
-            }
-        }
-        if($check == 0){
-            $lovelist = $userLoveDish->dish_id_list.$dish->id.'_';
-        }else{
-            $lovelist = $userLoveDish->dish_id_list;
-        }
-        $userLoveDish->update([
-            'dish_id_list' => $lovelist,
-        ]);
-
-        return response()->json($userLoveDish);
-    }
-
-    public function comment(Request $req,$id){
-        $user = Auth::user();
-        $dish = Dish::find($id);
-        $params = $req->only('comment');
-
-        $cmt = new Comment();
-
-        $cmt->dish_id = $dish->id;
-        $cmt->user_id = $user->id;
-        $cmt->comment = $params['comment'];
-
-        $cmt->save();
-
-        return response()->json($cmt);
-
-    }
 
     public function delete($id){
 

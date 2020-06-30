@@ -32,11 +32,12 @@ Route::group(['middleware' => 'jwt.auth'], function () {
     Route::put('dishes/{id}', 'API\APIDishController@update');
     Route::delete('dishes/{id}', 'API\APIDishController@delete');
 
-    //dish love
-    Route::put('dishes/{id}/love','API\APIDishController@love');
+    //dish love and loveless
+    Route::put('dishes/{id}/love','API\APIUserLikedListController@love');
+    Route::put('dishes/{id}/loveless','API\APIUserLikedListController@loveless');
 
     //user comment
-    Route::post('dishes/{id}/comment','API\APIDishController@comment');
+    Route::post('dishes/{id}/comment','API\APICommentController@comment');
 });
 
 Route::middleware('jwt.refresh')->get('/token/refresh', 'API\APIAuthController@refresh');

@@ -19,9 +19,9 @@
                 @foreach($comment as $cmt)
                         <tr>
                             <th scope="row">{{ $cmt->id }}</th>
-                            <td>@foreach($dish as $dish)
-                                    @if($dish->id == $cmt->dish_id)
-                                        {{ $dish->dish_name }}
+                            <td>@foreach($dish as $di)
+                                    @if($di->id == $cmt->dish_id)
+                                        {{ $di->dish_name }}
                                     @endif
                                 @endforeach
                             </td>

@@ -8,8 +8,8 @@
             <thead>
                 <tr>
                     <th scope="col">Comment ID</th>
+                    <th scope="col">Dish name</th>
                     <th scope="col">User name</th>
-                    <th scope="col">Dish ID</th>
                     <th scope="col">Comment</th>
                     <th scope="col">DateTime</th>
                     <th scope="col"></th>
@@ -34,7 +34,13 @@
                             <td>{{ $cmt->comment }}</td>
                             <td>{{ carbon\carbon::parse($cmt->updated_at)->toDateTimeString() }}</td>
                             <td>
-
+                                <form action="{{ route('admin.comment.delete',[$cmt->id]) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger">
+                                        <ion-icon name="trash"></ion-icon>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                 @endforeach

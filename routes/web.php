@@ -74,6 +74,7 @@ Route::group(['prefix'=>'admin','middleware'=>'auth','as'=>'admin.'], function()
     //comment
     Route::group(['prefix'=>'comment','as'=>'comment.'],function(){
         Route::get('','AdminController@cmtIndex')->name('index');
+        Route::delete('{id}/delete','CommentController@delete')->name('delete');
     });
 
     //dish_history

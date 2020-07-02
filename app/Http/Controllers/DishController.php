@@ -68,7 +68,7 @@ class DishController extends Controller
             'step_imgs'=>$step_imgs_path,
             'author'=>0,
             'liked_count'=>0,
-            'checked'=>1,
+            'checked'=>0,
         ]);
 
         return redirect()->route('admin.dish.index');
@@ -143,7 +143,9 @@ class DishController extends Controller
 
     public function delete($id){
         $post =Dish::find($id);
-        $post->delete();
+        $post->update([
+            'checked'=>0,
+        ]);
         return redirect()->route('admin.dish.index');
     }
 }

@@ -38,6 +38,12 @@ Route::group(['middleware' => 'jwt.auth'], function () {
 
     //user comment
     Route::post('dishes/{id}/comment','API\APICommentController@comment');
+
+    //some tips for edit comment
+    ///dishes/comment/3/edit?__method=PUT (@Path?__method=PUT) this is put method not post =)) LOL
+    Route::post('dishes/comment/{cmtid}/edit','API\APICommentController@update');
+
+    Route::delete('dishes/comment/{cmtid}/delete','API\APICommentController@delete');
 });
 
 Route::middleware('jwt.refresh')->get('/token/refresh', 'API\APIAuthController@refresh');

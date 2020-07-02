@@ -28,4 +28,30 @@ class APICommentController extends Controller
 
     }
 
+    public function update(Request $req, $cmtid){
+        $user = Auth::user();
+        $comment = Comment::find($cmtid);
+        $params = $req->only('comment');
+
+        if($user->id == $comment->user_id){
+            $comment->update([
+                'comment'=> $params['comment'],
+            ]);
+        }
+
+        return response()->json($comment);
+    }
+
+    public function delete($cmtid){
+        $user = Auth::user();
+        $comment = Comment::find($cmtid);
+        if($user->id == $comment->user_id){
+            $comment->delete();
+        }
+
+        return response()->json([
+            'success' => 'comment delete successfully',
+        ]);
+    }
+
 }

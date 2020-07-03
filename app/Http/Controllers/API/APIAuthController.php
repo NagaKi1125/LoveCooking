@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -59,9 +60,16 @@ class APIAuthController extends Controller
     public function user(Request $req)
     {
         $user = Auth::user();
+        $dish_liked = DB::table('user_liked_lists')->where('user_id',$user->id)->pluck('dish_id_list')[0];
 
         if ($user) {
-            return response($user, Response::HTTP_OK);
+            return response([
+                "id"=> $user->id,
+                "name"=> "Nguyễn Minh Thắng",
+                "username"=> "ThangWinner",
+                "level"=> 2,
+                "dish_liked"=>$dish_liked,
+            ], Response::HTTP_OK);
         }
 
         return response(null, Response::HTTP_BAD_REQUEST);

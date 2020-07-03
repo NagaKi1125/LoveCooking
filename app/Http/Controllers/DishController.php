@@ -6,9 +6,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Dish;
 use App\DishHistory;
-use Faker\Provider\Image;
 use Illuminate\Http\Request;
-use Symfony\Component\Console\Input\Input;
 use Illuminate\Support\Facades\DB;
 
 class DishController extends Controller

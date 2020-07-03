@@ -61,7 +61,7 @@ class APIAuthController extends Controller
     {
         $user = Auth::user();
         $dish_liked = DB::table('user_liked_lists')->where('user_id',$user->id)->pluck('dish_id_list')[0];
-
+        $follow = DB::table('follows')->where('user_id',$this->id)->pluck('follow_id_list')[0];
         if ($user) {
             return response([
                 "id"=> $user->id,
@@ -69,6 +69,7 @@ class APIAuthController extends Controller
                 "username"=> "ThangWinner",
                 "level"=> 2,
                 "dish_liked"=>$dish_liked,
+                "follow"=>$follow,
             ], Response::HTTP_OK);
         }
 

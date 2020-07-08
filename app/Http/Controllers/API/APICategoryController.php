@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\API;
 
 use App\Category;
-use App\Http\Controllers\API\BaseController;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CategoryResources;
 
@@ -11,59 +10,43 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 
-class APICategoryController extends BaseController
+class APICategoryController
 {
 
 
     public function index(){
         $category = Category::all();
-        return $this->sendResponse(CategoryResources::collection($category),'Category retrieved successfully');
+        return CategoryResources::collection($category);
     }
 
     public function store(Request $request)
     {
         $input = $request->all();
 
-        $validator = Validator::make($input, [
-            'category' => 'required'
-        ]);
+        $category = new Category();
 
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
+        $category->category = $input['category'];
 
-        $category = Category::create($input);
-
-        return $this->sendResponse(new CategoryResources($category), 'Category created successfully.');
+        $category->save();
+        return $category;
     }
 
     public function show($id)
     {
         $category = Category::find($id);
 
-        if (is_null($category)) {
-            return $this->sendError('Category not found.');
-        }
-
-        return $this->sendResponse(new CategoryResources($category), 'Category retrieved successfully.');
+       return new CategoryResources($category);
     }
 
     public function update(Request $request, $id)
     {
         $input = $request->all();
         $category= Category::find($id);
-        $validator = Validator::make($input, [
-            'category' => 'required',
-        ]);
-
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
 
         $category->category = $input['category'];
         $category->save();
 
-        return $this->sendResponse(new CategoryResources($category), 'Category updated successfully.');
+        return new CategoryResources($category);
     }
 
     public function destroy($id)
@@ -71,6 +54,6 @@ class APICategoryController extends BaseController
         $category=Category::find($id);
         $category->delete();
 
-        return $this->sendResponse([], 'Category deleted successfully.');
+        return response('Delete successfully');
     }
 }

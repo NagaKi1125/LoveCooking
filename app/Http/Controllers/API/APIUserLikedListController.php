@@ -24,27 +24,26 @@ class APIUserLikedListController extends Controller
             }
         }
 
-
-        $dish->update([
-            'love' => $dish->liked_count++,
-        ]);
-        $check=0;
-        $lovelist = explode("_",$lovedish);
-        foreach($lovelist as $ld){
-            if($ld == $dish->id){
-                $check++;
-            }
-        }
-
         $UserLikedDish = UserLikedList::find($loveID);
-        if($check == 0){
-            $userlovelist = $lovedish.$dish->id.'_';
-        }else{
+        if(strpos($lovedish,$id)!== false){
             $userlovelist = $lovedish;
+            $UserLikedDish->update([
+                'dish_id_list' => $userlovelist,
+            ]);
+
+            $dish->update([
+                'love' => $dish->liked_count,
+            ]);
+        }else{
+            $userlovelist = $lovedish.$dish->id.'_';
+            $UserLikedDish->update([
+                'dish_id_list' => $userlovelist,
+            ]);
+
+            $dish->update([
+                'love' => $dish->liked_count++,
+            ]);
         }
-        $UserLikedDish->update([
-            'dish_id_list' => $userlovelist,
-        ]);
 
         return response()->json($UserLikedDish);
     }
@@ -52,7 +51,6 @@ class APIUserLikedListController extends Controller
     public function loveless($id){
         $user = Auth::user();
         $userLoveDish = UserLikedList::all();
-
         $dish = Dish::find($id);
 
         foreach($userLoveDish as $loveDish){
@@ -63,31 +61,31 @@ class APIUserLikedListController extends Controller
         }
 
 
+
+        $UserLikedDish = UserLikedList::find($loveID);
+        if(strpos($lovedish,$id)!== false){
+            $userlovelist = str_replace($dish->id."_","",$lovedish);
+        }else{
+            $userlovelist = $lovedish;
+        }
+
+
         if($dish->liked_count == 0){
             $dish->update([
-                'love' => $dish->liked_count,
+                'love' => $dish->liked_count++,
+            ]);
+            $UserLikedDish->update([
+                'dish_id_list'=>$userlovelist,
             ]);
         }else{
             $dish->update([
                 'love' => $dish->liked_count--,
             ]);
+            $UserLikedDish->update([
+                'dish_id_list'=>$userlovelist,
+            ]);
         }
 
-
-        $UserLikedDish = UserLikedList::find($loveID);
-        $list="";
-        $lovelist = explode('_',$lovedish);
-        foreach( $lovelist as $loveli){
-            if($loveli == $dish->id){
-                $list=$list;
-            }else{
-                $list.=$loveli.'_';
-            }
-        }
-
-        $UserLikedDish->update([
-            'dish_id_list'=>$list,
-        ]);
 
         return response()->json($UserLikedDish);
     }

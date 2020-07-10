@@ -82,7 +82,7 @@ class APIMenuController extends Controller
 
             }elseif($params['date_time']==2){
                 if(strpos($lunch,$params['dish_id']) !== false){
-                    $lulist = str_replace($dish->id."_","",$lunch);
+                    $lulist = str_replace("_".$dish->id."_","",$lunch);
                 }else{
                     $lulist = $lunch;
                 }

@@ -64,43 +64,48 @@ class APIMenuController extends Controller
         $dish = Dish::find($params['dish_id']);
         $menu = Menu::find($id);
 
+        $breakfast = $menu->breakfast_list;
+        $lunch = $menu->lunch_list;
+        $dinner = $menu->dinner_list;
+
         if($user->id == $menu->user_id){
             if($params['date_time']==1){
-                $menuBreakfast =explode("_",$menu->breakfast_list);
-                $breakList ="";
-                foreach($menuBreakfast as $mbr){
-                    if($mbr==$dish->id){
-                        $breakList=$breakList;
-                    }else $breakList.="_".$mbr;
+                if(strpos($breakfast,$params['dish_id']) !== false){
+                    $breakfast .= str_replace($dish->id."_","",$breakfast);
+                }else{
+                    $breakfast = $breakfast;
                 }
+
                 $menu->update([
-                    'breakfast_list'=> $breakList,
+                    'breakfast_list'=> $breakfast,
                 ]);
+
             }elseif($params['date_time']==2){
-                $menuLunch = explode("_",$menu->lunch_list);
-                $lunchList ="";
-                foreach($menuLunch as $ml){
-                    if($ml==$dish->id){
-                        $lunchList=$lunchList;
-                    }else $lunchList.="_".$ml;
+                if($params['date_time']==1){
+                    if(strpos($lunch,$params['dish_id']) !== false){
+                        $lunch .= str_replace($dish->id."_","",$lunch);
+                    }else{
+                        $lunch = $lunch;
+                    }
+
+                    $menu->update([
+                        'lunch_list'=> $lunch,
+                    ]);
                 }
-                $menu->update([
-                    'lunch_list'=> $lunchList,
-                ]);
             }else{
-                $menuDinner = explode("_",$menu->dinner_list);
-                $dinnerList ="";
-                foreach($menuDinner as $md){
-                    if($md==$dish->id){
-                        $dinnerList=$dinnerList;
-                    }else $dinnerList.="_".$md;
+                if($params['date_time']==1){
+                    if(strpos($dinner,$params['dish_id']) !== false){
+                        $dinner .= str_replace($dish->id."_","",$dinner);
+                    }else{
+                        $dinner = $dinner;
+                    }
+
+                    $menu->update([
+                        'dinner_list'=> $dinner,
+                    ]);
                 }
-                $menu->update([
-                    'dinner_list'=> $dinnerList,
-                ]);
             }
         }
-
         return response()->json($menu);
     }
 

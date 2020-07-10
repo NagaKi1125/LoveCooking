@@ -46,7 +46,7 @@ class APIMenuController extends Controller
                 ]);
             }elseif($params['date_time']==2){
                 $menu->update([
-                    'lunch_list'=> "_".$menu->lunch_list.=$dish->id."_",
+                    'lunch_list'=> $menu->lunch_list.=$dish->id."_",
                 ]);
             }else{
                 $menu->update([

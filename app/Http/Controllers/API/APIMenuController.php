@@ -71,7 +71,7 @@ class APIMenuController extends Controller
         if($user->id == $menu->user_id){
             if($params['date_time']==1){
                 if(strpos($breakfast,$params['dish_id']) !== false){
-                    $breakfast .= str_replace($dish->id."_","",$breakfast);
+                    $breakfast = str_replace($dish->id."_","",$breakfast);
                 }else{
                     $breakfast = $breakfast;
                 }
@@ -83,7 +83,7 @@ class APIMenuController extends Controller
             }elseif($params['date_time']==2){
                 if($params['date_time']==1){
                     if(strpos($lunch,$params['dish_id']) !== false){
-                        $lunch .= str_replace($dish->id."_","",$lunch);
+                        $lunch = str_replace($dish->id."_","",$lunch);
                     }else{
                         $lunch = $lunch;
                     }
@@ -95,7 +95,7 @@ class APIMenuController extends Controller
             }else{
                 if($params['date_time']==1){
                     if(strpos($dinner,$params['dish_id']) !== false){
-                        $dinner .= str_replace($dish->id."_","",$dinner);
+                        $dinner = str_replace($dish->id."_","",$dinner);
                     }else{
                         $dinner = $dinner;
                     }

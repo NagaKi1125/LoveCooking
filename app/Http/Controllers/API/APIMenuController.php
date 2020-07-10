@@ -46,7 +46,7 @@ class APIMenuController extends Controller
                 ]);
             }elseif($params['date_time']==2){
                 $menu->update([
-                    'lunch_list'=> $menu->lunch_list.=$dish->id."_",
+                    'lunch_list'=> "_".$menu->lunch_list.=$dish->id."_",
                 ]);
             }else{
                 $menu->update([
@@ -82,7 +82,7 @@ class APIMenuController extends Controller
 
             }elseif($params['date_time']==2){
                 if(strpos($lunch,$params['dish_id']) !== false){
-                    $lulist = str_replace("_".$dish->id."_","",$lunch);
+                    $lulist = str_replace($dish->id."_","",$lunch);
                 }else{
                     $lulist = $lunch;
                 }

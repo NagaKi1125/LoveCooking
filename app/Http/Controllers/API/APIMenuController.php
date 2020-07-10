@@ -64,44 +64,44 @@ class APIMenuController extends Controller
         $dish = Dish::find($params['dish_id']);
         $menu = Menu::find($id);
 
-        $breakfast = $menu->breakfast_list;
-        $lunch = $menu->lunch_list;
-        $dinner = $menu->dinner_list;
+        $breakfast = $menu->breakfast_list; $brlist = "";
+        $lunch = $menu->lunch_list; $lulist="";
+        $dinner = $menu->dinner_list; $dinlist="";
 
         if($user->id == $menu->user_id){
             if($params['date_time']==1){
                 if(strpos($breakfast,$params['dish_id']) !== false){
-                    $breakfast = str_replace($dish->id."_","",$breakfast);
+                    $brlist = str_replace($dish->id."_","",$breakfast);
                 }else{
-                    $breakfast = $breakfast;
+                    $brlist = $breakfast;
                 }
 
                 $menu->update([
-                    'breakfast_list'=> $breakfast,
+                    'breakfast_list'=> $brlist,
                 ]);
 
             }elseif($params['date_time']==2){
                 if($params['date_time']==1){
                     if(strpos($lunch,$params['dish_id']) !== false){
-                        $lunch = str_replace($dish->id."_","",$lunch);
+                        $lulist = str_replace($dish->id."_","",$lunch);
                     }else{
-                        $lunch = $lunch;
+                        $lulist = $lunch;
                     }
 
                     $menu->update([
-                        'lunch_list'=> $lunch,
+                        'lunch_list'=> $lulist,
                     ]);
                 }
             }else{
                 if($params['date_time']==1){
                     if(strpos($dinner,$params['dish_id']) !== false){
-                        $dinner = str_replace($dish->id."_","",$dinner);
+                        $dinlist = str_replace($dish->id."_","",$dinner);
                     }else{
-                        $dinner = $dinner;
+                        $dinlist = $dinner;
                     }
 
                     $menu->update([
-                        'dinner_list'=> $dinner,
+                        'dinner_list'=> $dinlist,
                     ]);
                 }
             }

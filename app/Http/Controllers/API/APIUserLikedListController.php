@@ -32,7 +32,7 @@ class APIUserLikedListController extends Controller
             ]);
 
             $dish->update([
-                'love' => $dish->liked_count,
+                'liked_count' => $dish->liked_count++,
             ]);
         }else{
             $userlovelist = $lovedish.$dish->id.'_';
@@ -41,10 +41,9 @@ class APIUserLikedListController extends Controller
             ]);
 
             $dish->update([
-                'love' => $dish->liked_count++,
+                'liked_count' => $dish->liked_count++,
             ]);
         }
-
         return response()->json($UserLikedDish);
     }
 
@@ -60,8 +59,6 @@ class APIUserLikedListController extends Controller
             }
         }
 
-
-
         $UserLikedDish = UserLikedList::find($loveID);
         if(strpos($lovedish,$id)!== false){
             $userlovelist = str_replace($dish->id."_","",$lovedish);
@@ -72,20 +69,19 @@ class APIUserLikedListController extends Controller
 
         if($dish->liked_count == 0){
             $dish->update([
-                'love' => $dish->liked_count++,
+                'liked_count' => $dish->liked_count--,
             ]);
             $UserLikedDish->update([
                 'dish_id_list'=>$userlovelist,
             ]);
         }else{
             $dish->update([
-                'love' => $dish->liked_count--,
+                'liked_count' => $dish->liked_count--,
             ]);
             $UserLikedDish->update([
                 'dish_id_list'=>$userlovelist,
             ]);
         }
-
 
         return response()->json($UserLikedDish);
     }

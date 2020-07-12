@@ -38,7 +38,6 @@ class APIAuthController extends Controller
         return response()->json(['token'=>$token],Response::HTTP_OK);
     }
 
-
     public function register(RegisterFormRequest $req){
         $params =$req->only('email','name','password','username','gender','address','birthday');
         $user = New User();
@@ -65,9 +64,9 @@ class APIAuthController extends Controller
         if ($user) {
             return response([
                 "id"=> $user->id,
-                "name"=> "Nguyễn Minh Thắng",
-                "username"=> "ThangWinner",
-                "level"=> 2,
+                "name"=> $user->name,
+                "username"=> $user->username,
+                "level"=> $user->level,
                 "dish_liked"=>$dish_liked,
                 "follow"=>$follow,
             ], Response::HTTP_OK);

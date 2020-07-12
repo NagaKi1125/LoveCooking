@@ -40,14 +40,12 @@ Route::group(['middleware' => 'jwt.auth'], function () {
     Route::post('dishes/{id}/comment','API\APICommentController@comment');
 
     //some tips for edit comment
-    ///dishes/comment/3/edit?__method=PUT (@Path?__method=PUT) this is put method not post =)) LOL
+    ///dishes/comment/3/edit
     Route::post('dishes/comment/{cmtid}/edit','API\APICommentController@update');
-
     Route::delete('dishes/comment/{cmtid}/delete','API\APICommentController@delete');
 
     //Menu (make new )  - add,remove and delete
     Route::post('menu-new','API\APIMenuController@new');
-    //?__method=PUT (@Path?__method=PUT)
     Route::post('menu-add/{id}','API\APIMenuController@add');
     Route::post('menu-remove/{id}','API\APIMenuController@remove');
     Route::delete('menu-delete/{id}','API\APIMenuController@delete');

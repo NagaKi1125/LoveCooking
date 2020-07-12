@@ -72,36 +72,25 @@ class APIMenuController extends Controller
             if($params['date_time']==1){
                 if(strpos($breakfast,$params['dish_id']) !== false){
                     $brlist = str_replace($dish->id."_","",$breakfast);
-                }else{
-                    $brlist = $breakfast;
+                    $menu->update([
+                        'breakfast_list'=> $brlist,
+                    ]);
                 }
-
-                $menu->update([
-                    'breakfast_list'=> $brlist,
-                ]);
 
             }elseif($params['date_time']==2){
                 if(strpos($lunch,$params['dish_id']) !== false){
                     $lulist = str_replace($dish->id."_","",$lunch);
-                }else{
-                    $lulist = $lunch;
+                    $menu->update([
+                        'lunch_list'=> $lulist,
+                    ]);
                 }
-
-                $menu->update([
-                    'lunch_list'=> $lulist,
-                ]);
-
             }else if($params['date_time']==3){
                 if(strpos($dinner,$params['dish_id']) !== false){
                     $dinlist = str_replace($dish->id."_","",$dinner);
-                }else{
-                    $dinlist = $dinner;
+                    $menu->update([
+                        'dinner_list'=> $dinlist,
+                    ]);
                 }
-
-                $menu->update([
-                    'dinner_list'=> $dinlist,
-                ]);
-
             }
         }
         return response()->json($menu);

@@ -30,10 +30,6 @@ class APIUserLikedListController extends Controller
             $UserLikedDish->update([
                 'dish_id_list' => $userlovelist,
             ]);
-
-            $dish->update([
-                'liked_count' => $dish->liked_count++,
-            ]);
         }else{
             $userlovelist = $lovedish.$dish->id.'_';
             $UserLikedDish->update([
@@ -41,7 +37,7 @@ class APIUserLikedListController extends Controller
             ]);
 
             $dish->update([
-                'liked_count' => $dish->liked_count++,
+                'liked_count' => $dish->liked_count+1,
             ]);
         }
         return response()->json($UserLikedDish);
@@ -68,15 +64,12 @@ class APIUserLikedListController extends Controller
 
 
         if($dish->liked_count == 0){
-            $dish->update([
-                'liked_count' => $dish->liked_count--,
-            ]);
             $UserLikedDish->update([
                 'dish_id_list'=>$userlovelist,
             ]);
         }else{
             $dish->update([
-                'liked_count' => $dish->liked_count--,
+                'liked_count' => $dish->liked_count-1,
             ]);
             $UserLikedDish->update([
                 'dish_id_list'=>$userlovelist,

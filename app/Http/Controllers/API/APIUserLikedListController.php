@@ -27,7 +27,7 @@ class APIUserLikedListController extends Controller
 
         $UserLikedDish = UserLikedList::find($loveID);
 
-        if(strpos($lovedish,$id) != false){
+        if(strpos($lovedish,"_".$id."_") != false){
 
         }else{
             $like = $dish->liked_count;
@@ -56,7 +56,7 @@ class APIUserLikedListController extends Controller
         }
 
         $UserLikedDish = UserLikedList::find($loveID);
-        if(strpos($lovedish,$id) != false){
+        if(strpos($lovedish,"_".$id."_") != false){
             $like = $dish->liked_count;
             $dish->update([
                 'liked_count' => $like-1,

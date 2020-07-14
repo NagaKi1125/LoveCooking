@@ -25,9 +25,9 @@ class APIMenuController extends Controller
         $menu = new Menu();
         $menu->user_id = $user->id;
         $menu->menu_date = $params['menu_date'];
-        $menu->breakfast_list = $params['breakfast_list'];
-        $menu->lunch_list = $params['lunch_list'];
-        $menu->dinner_list = $params['dinner_list'];
+        $menu->breakfast_list = "_".$params['breakfast_list'];
+        $menu->lunch_list = "_".$params['lunch_list'];
+        $menu->dinner_list = "_".$params['dinner_list'];
 
         $menu->save();
         return response()->json($menu);
@@ -70,7 +70,7 @@ class APIMenuController extends Controller
 
         if($user->id == $menu->user_id){
             if($params['date_time']==1){
-                if(strpos($breakfast,$params['dish_id']) !== false){
+                if(strpos($breakfast,"_".$params['dish_id']."_") !== false){
                     $brlist = str_replace($dish->id."_","",$breakfast);
                     $menu->update([
                         'breakfast_list'=> $brlist,
@@ -78,14 +78,14 @@ class APIMenuController extends Controller
                 }
 
             }elseif($params['date_time']==2){
-                if(strpos($lunch,$params['dish_id']) !== false){
+                if(strpos($lunch,"_".$params['dish_id']."_") !== false){
                     $lulist = str_replace($dish->id."_","",$lunch);
                     $menu->update([
                         'lunch_list'=> $lulist,
                     ]);
                 }
             }else if($params['date_time']==3){
-                if(strpos($dinner,$params['dish_id']) !== false){
+                if(strpos($dinner,"_".$params['dish_id']."_") !== false){
                     $dinlist = str_replace($dish->id."_","",$dinner);
                     $menu->update([
                         'dinner_list'=> $dinlist,

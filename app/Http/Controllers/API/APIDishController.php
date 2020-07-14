@@ -53,7 +53,7 @@ class APIDishController extends Controller
 		// in android end point of dish will have 10 values of step images =))))
 
         $dish->dish_name = $params['dish_name'];
-        $dish->cate_id = $params['cate_id'];
+        $dish->cate_id = "_".$params['cate_id'];
         $dish->avatar = $avapath;
         $dish->description = $params['description'];
         $dish->use = $params['use'];

@@ -59,40 +59,15 @@ class APIMenuController extends Controller
     }
 
     public function remove(Request $req,$id){
-        $user = Auth::user();
-        $params = $req->only('dish_id','date_time');
-        $dish = Dish::find($params['dish_id']);
+        $params = $req->only('breakfast','lunch','dinner');
         $menu = Menu::find($id);
 
-        $breakfast = $menu->breakfast_list; $brlist = "";
-        $lunch = $menu->lunch_list; $lulist="";
-        $dinner = $menu->dinner_list; $dinlist="";
+        $menu->update([
+            'breakfast_list'=>"_".$params['breakfast'],
+            'lunch_list'=>"_".$params['lunch'],
+            'dinner_list'=>"_".$params['dinner'],
+        ]);
 
-        if($user->id == $menu->user_id){
-            if($params['date_time']==1){
-                if(strpos($breakfast,"_".$params['dish_id']."_") !== false){
-                    $brlist = str_replace($dish->id."_","",$breakfast);
-                    $menu->update([
-                        'breakfast_list'=> $brlist,
-                    ]);
-                }
-
-            }elseif($params['date_time']==2){
-                if(strpos($lunch,"_".$params['dish_id']."_") !== false){
-                    $lulist = str_replace($dish->id."_","",$lunch);
-                    $menu->update([
-                        'lunch_list'=> $lulist,
-                    ]);
-                }
-            }else if($params['date_time']==3){
-                if(strpos($dinner,"_".$params['dish_id']."_") !== false){
-                    $dinlist = str_replace($dish->id."_","",$dinner);
-                    $menu->update([
-                        'dinner_list'=> $dinlist,
-                    ]);
-                }
-            }
-        }
         return response()->json($menu);
     }
 

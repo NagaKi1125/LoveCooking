@@ -28,7 +28,7 @@ Route::group(['middleware' => 'jwt.auth'], function () {
     Route::get('user-info', 'API\APIUserController@show');
 
     //dishes
-    Route::post('dishes', 'API\APIDishController@store');	
+    Route::post('dishes', 'API\APIDishController@store');
     Route::put('dishes/{id}', 'API\APIDishController@update');
     Route::delete('dishes/{id}', 'API\APIDishController@delete');
 
@@ -74,5 +74,6 @@ Route::get('dish-history/{id}', 'API\APIDishHistoryController@show');
 Route::get('menus', 'API\APIMenuController@index');
 Route::get('menus/{id}', 'API\APIMenuController@show');
 
-
+//comment
+Route::get('dishes/{id}/comment','API\APICommentController@show');
 

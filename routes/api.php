@@ -53,6 +53,9 @@ Route::group(['middleware' => 'jwt.auth'], function () {
 
 Route::middleware('jwt.refresh')->get('/token/refresh', 'API\APIAuthController@refresh');
 
+//search
+Route::get('search',"API\APISearchController@searchDish");
+
 //categories
 Route::get('categories','API\APICategoryController@index');
 Route::get('categories/{id}','API\APICategoryController@show');

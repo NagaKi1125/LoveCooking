@@ -28,11 +28,11 @@ class DishSearchResources extends JsonResource
 
         return [
             'id' => $this->id,
-            'dish_name'=>$this->dish_name,
+            'name'=>$this->dish_name,
             'description'=>$this->description,
             'use'=>$this->use,
             'avatar'=>$this->avatar,
-            'author'=>$name,
+            'author'=>$this->author,
             'create'=>$this->created_at,
         ];
     }

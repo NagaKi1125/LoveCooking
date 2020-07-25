@@ -16,7 +16,6 @@ class APISearchController extends Controller
 
         if($params['data'] !== ""){
             $dish = DB::table('dishes')
-            ->where('checked','1')
             ->orWhere('dish_name','like','%'.$params['data'].'%')
             ->orWhere('use','like','%'.$params['data'].'%')
             ->orWhere('description','like','%'.$params['data'].'%')

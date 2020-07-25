@@ -28,7 +28,7 @@ Route::group(['middleware' => 'jwt.auth'], function () {
     Route::get('user-info', 'API\APIUserController@show');
 
     //dishes
-    Route::post('dishes', 'API\APIDishController@store');
+    Route::post('dishes/upload', 'API\APIDishController@store');
     Route::put('dishes/{id}', 'API\APIDishController@update');
     Route::delete('dishes/{id}', 'API\APIDishController@delete');
 

@@ -50,8 +50,8 @@ return [
 
         'public' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'root'   => public_path() . '/upload',
+            'url' => env('APP_URL').'/public',
             'visibility' => 'public',
         ],
 
@@ -63,6 +63,10 @@ return [
             'bucket' => env('AWS_BUCKET'),
             'url' => env('AWS_URL'),
             'endpoint' => env('AWS_ENDPOINT'),
+        ],
+        'user_attachments' => [
+            'driver' => 'local',
+            'root' => public_path('user_attachments')
         ],
 
     ],

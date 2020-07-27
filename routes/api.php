@@ -49,6 +49,9 @@ Route::group(['middleware' => 'jwt.auth'], function () {
     Route::post('menu-add/{id}','API\APIMenuController@add');
     Route::post('menu-remove/{id}','API\APIMenuController@remove');
     Route::delete('menu-delete/{id}','API\APIMenuController@delete');
+	
+	//categories added
+	Route::post('cate-add','API\APICategoryController@add');
 });
 
 Route::middleware('jwt.refresh')->get('/token/refresh', 'API\APIAuthController@refresh');

@@ -33,7 +33,7 @@ class APIDishController extends Controller
         $dish = new Dish();
         $params = $request->only('dish_name','cate_id','avatar',
                 'description','use','material','steps','step_imgs1','step_imgs2','step_imgs3',
-                'step_imgs4','step_imgs5','step_imgs6','step_imgs7','step_imgs8','step_imgs9');
+                'step_imgs4','step_imgs5','step_imgs6','step_imgs7','step_imgs8','step_imgs9','step_img10');
         //avatar
         // if($request->hasFile('avatar')){
 
@@ -45,7 +45,7 @@ class APIDishController extends Controller
 
 
         $avatar = $params['avatar'];
-        if($avatar != "null" || $avatar != null){
+        if($avatar != "" && $avatar != null && $avatar != "null"){
             $extension = explode('/',explode(':',substr($avatar,0,strpos($avatar,';')))[1])[1];
             $replace = substr($avatar,0,strpos($avatar,',')+1);
             $image = str_replace($replace,'',$avatar);
@@ -61,7 +61,7 @@ class APIDishController extends Controller
         $steppath='';$i=1;
         $stepsrray = explode("_",$params['steps']);
         for($i = 1;$i<=count($stepsrray);$i++){
-            if($params['step_imgs'.$i]!= null){
+            if($params['step_imgs'.$i]!= null && $params['step_imgs'.$i] != "null"){
                 $stepExtension = explode('/',explode(':',substr($params['step_imgs'.$i],0,strpos($params['step_imgs'.$i],';')))[1])[1];
                 $stepreplace = substr($params['step_imgs'.$i],0,strpos($params['step_imgs'.$i],',')+1);
                 $stepimage = str_replace($stepreplace,'',$params['step_imgs'.$i]);

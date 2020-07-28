@@ -99,7 +99,7 @@ class APIDishController extends Controller
             $imageName = 'image'.$params['dish_name'].time().'.'.$extension;
             Storage::disk('public')->put($imageName,base64_decode($image));
         }else{
-            $imageName= "null";
+            $imageName= $dish->avatar;
         }
 
         $steppath='';$i=1;

@@ -30,10 +30,22 @@ class DishResources extends JsonResource
         foreach($cate_id as $cai){
             foreach($category as $cate){
                 if($cai == $cate->id){
-                    $cate_list.=$cate->category."_";
+                    $cate_list.=$cate->id."#".$cate->category."_";
                 }
             }
         }
+        $user = User::all();
+        if($this->author == 0){
+            $name = "Admin - Love Cooking";
+        }else{
+            foreach($user as $us){
+                if($us->id == $this->author){
+                    $name = $us->name;
+                }
+            }
+        }
+
+
 
         return [
             'id'=>$this->id,
@@ -45,7 +57,7 @@ class DishResources extends JsonResource
             'material'=>$this->material,
             'steps'=>$this->steps,
             'step_imgs'=>$this->step_imgs,
-            'author'=>$this->author,
+            'author'=>$name,
             'liked_count'=>$this->liked_count,
             //history
             'history'=>$dishhis,

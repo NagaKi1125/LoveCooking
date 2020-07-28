@@ -2,15 +2,11 @@
 
 namespace App\Http\Resources;
 
-use App\Dish;
-use App\Follow;
-use App\Menu;
 use App\User;
-use App\UserLikedList;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\DB;
 
-class MenuFollowLikedResources extends JsonResource
+class FollowLikedResources extends JsonResource
 {
     /**
      * Transform the resource into an array.

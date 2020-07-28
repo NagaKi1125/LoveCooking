@@ -21,11 +21,11 @@ class APICategoryController
 
     public function store(Request $request)
     {
-        $input = $request->all();
+        $params = $request->only('category');
 
         $category = new Category();
 
-        $category->category = $input['category'];
+        $category->category = $params['category'];
 
         $category->save();
         return $category;

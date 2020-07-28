@@ -32,7 +32,7 @@ class DishSearchResources extends JsonResource
             'description'=>$this->description,
             'use'=>$this->use,
             'avatar'=>$this->avatar,
-            'author'=>$this->author,
+            'author'=>$name,
             'create'=>$this->created_at,
         ];
     }

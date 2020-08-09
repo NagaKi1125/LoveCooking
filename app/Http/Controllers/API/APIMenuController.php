@@ -18,42 +18,38 @@ class APIMenuController extends Controller
         return MenuResources::collection($menu);
     }
 
+    public function spinner(){
+        $user = Auth::user();
+        $menu = DB::table('menus')->where('user_id',$user->id)->get();
+        return response()->json($menu);
+    }
+
     public function new(Request $req){
         $user = Auth::user();
-        $params = $req->only('menu_date','breakfast_list','lunch_list','dinner_list');
+        $params = $req->only('menu_date');
 
         $menu = new Menu();
         $menu->user_id = $user->id;
         $menu->menu_date = $params['menu_date'];
-        $menu->breakfast_list = "_".$params['breakfast_list'];
-        $menu->lunch_list = "_".$params['lunch_list'];
-        $menu->dinner_list = "_".$params['dinner_list'];
+        $menu->breakfast_list = "_";
+        $menu->lunch_list = "_";
+        $menu->dinner_list = "_";
 
         $menu->save();
         return response()->json($menu);
     }
 
+
+
     public function add(Request $req,$id){
-        $user = Auth::user();
-        $params = $req->only('dish_id','date_time');
-        $dish = Dish::find($params['dish_id']);
+        $params = $req->only('breakfast','lunch','dinner');
         $menu = Menu::find($id);
 
-        if($user->id == $menu->user_id){
-            if($params['date_time']==1){
-                $menu->update([
-                    'breakfast_list'=> $menu->breakfast_list.=$dish->id."_",
-                ]);
-            }elseif($params['date_time']==2){
-                $menu->update([
-                    'lunch_list'=> $menu->lunch_list.=$dish->id."_",
-                ]);
-            }else{
-                $menu->update([
-                    'dinner_list'=> $menu->dinner_list.=$dish->id."_",
-                ]);
-            }
-        }
+        $menu->update([
+            'breakfast_list'=>"_".$params['breakfast'],
+            'lunch_list'=>"_".$params['lunch'],
+            'dinner_list'=>"_".$params['dinner'],
+        ]);
 
         return response()->json($menu);
     }

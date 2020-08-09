@@ -91,21 +91,24 @@ class APIDishController extends Controller
         'step_imgs4','step_imgs5','step_imgs6','step_imgs7','step_imgs8','step_imgs9','step_img10');
 
         $avatar = $params['avatar'];
-        if($avatar != "" && $avatar != null && $avatar != "null"){
+        if (strpos($avatar,"null") !== false || strpos($avatar,"upload")!==false){
+            $avatarName = $avatar;
+        }else{
             $extension = explode('/',explode(':',substr($avatar,0,strpos($avatar,';')))[1])[1];
             $replace = substr($avatar,0,strpos($avatar,',')+1);
             $image = str_replace($replace,'',$avatar);
             $image = str_replace(' ','+',$image);
             $imageName = 'image'.$params['dish_name'].time().'.'.$extension;
+            $avatarName = 'upload/'.$imageName;
             Storage::disk('public')->put($imageName,base64_decode($image));
-        }else{
-            $imageName= $dish->avatar;
         }
 
         $steppath='';$i=1;
         $stepsrray = explode("_",$params['steps']);
         for($i = 1;$i<=count($stepsrray);$i++){
-            if($params['step_imgs'.$i]!= null && $params['step_imgs'.$i] != "null"){
+            if(strpos($params['step_imgs'.$i],'null') !== false || strpos($params['step_imgs'.$i],'upload')!==false){
+                $steppath.=$params['step_imgs'.$i]."_";
+            }else {
                 $stepExtension = explode('/',explode(':',substr($params['step_imgs'.$i],0,strpos($params['step_imgs'.$i],';')))[1])[1];
                 $stepreplace = substr($params['step_imgs'.$i],0,strpos($params['step_imgs'.$i],',')+1);
                 $stepimage = str_replace($stepreplace,'',$params['step_imgs'.$i]);
@@ -113,12 +116,12 @@ class APIDishController extends Controller
                 $stepimageName = $i.'step'.time().'image'.$params['dish_name'].time().'.'.$stepExtension;
                 Storage::disk('public')->put($stepimageName,base64_decode($stepimage));
                 $steppath.='upload/'.$stepimageName."_";
-            }else $steppath.="null_";
+            }
         }
 
         $dish->dish_name = $params['dish_name'];
         $dish->cate_id = "_".$params['cate_id'];
-        $dish->avatar = 'upload/'.$imageName;
+        $dish->avatar =$avatarName;
         $dish->description = $params['description'];
         $dish->use = $params['use'];
         $dish->material = $params['material'];
@@ -128,10 +131,9 @@ class APIDishController extends Controller
         $dish->liked_count = 0;
         $dish->checked = 0;
 
-        if($dish->save()){
+		if($dish->save()){
             return new DishResources($dish);
         }else return response("Failed");
-
 
     }
 

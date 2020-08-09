@@ -25,12 +25,17 @@ Route::group(['middleware' => 'jwt.auth'], function () {
     //follow and dish liked
     Route::get('follow-liked','API\APIFollowLikedController@show');
     Route::get('user-menu','API\APIMenuController@show');
+    Route::get('user-menu-spinner','API\APIMenuController@spinner');
+    Route::get('user-dishes','API\APIUserController@userDishes');
+
     Route::get('user-info', 'API\APIUserController@show');
+    Route::post('user-update','API\APIUserController@update');
+	Route::post('user-change-password','API\APIUserController@changePassword');
 
     //dishes
     Route::post('dishes/upload', 'API\APIDishController@store');
-    Route::put('dishes/{id}/edit', 'API\APIDishController@update');
-    Route::delete('dishes/{id}/delete', 'API\APIDishController@delete');
+    Route::post('dishes-edit/{id}', 'API\APIDishController@update');
+    Route::delete('dishes-delete/{id}', 'API\APIDishController@delete');
 
     //dish love and loveless
     Route::put('dishes/{id}/love','API\APIUserLikedListController@love');
@@ -51,7 +56,12 @@ Route::group(['middleware' => 'jwt.auth'], function () {
     Route::delete('menu-delete/{id}','API\APIMenuController@delete');
 
 	//categories added
-	Route::post('cate-add','API\APICategoryController@store');
+    Route::post('cate-add','API\APICategoryController@store');
+
+    //follows  - unfollow
+    Route::post('unfollow/{fid}','API\APIFollowLikedController@unfollow');
+    //follows - follow
+    Route::post('follow/{fid}','APi\APIFollowLikedController@follow');
 });
 
 Route::middleware('jwt.refresh')->get('/token/refresh', 'API\APIAuthController@refresh');

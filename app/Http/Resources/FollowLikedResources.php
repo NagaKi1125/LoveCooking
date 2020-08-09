@@ -27,7 +27,8 @@ class FollowLikedResources extends JsonResource
         foreach($fo_list as $fli){
             foreach($user as $us){
                 if($fli == $us->id){
-                    $follow_list.=$us->id."#".$us->name."_";
+					if($us->avatar=="") $us->avatar="null";
+                    $follow_list.=$us->id."#".$us->name."#".$us->avatar."_";
                 }
             }
         }

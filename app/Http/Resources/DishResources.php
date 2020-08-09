@@ -5,6 +5,7 @@ namespace App\Http\Resources;
 use App\DishHistory;
 use App\User;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class DishResources extends JsonResource
@@ -17,6 +18,8 @@ class DishResources extends JsonResource
      */
     public function toArray($request)
     {
+
+        Carbon::setLocale("vi");
 
         $dishhis = DB::table('dish_histories')->select('dish_histories.dh_posts')->where('dish_id',$this->id)->get();
         $usercmt = DB::table('comments')
@@ -59,11 +62,12 @@ class DishResources extends JsonResource
             'step_imgs'=>$this->step_imgs,
             'author'=>$name,
             'liked_count'=>$this->liked_count,
+			'checked'=>$this->checked,
             //history
             'history'=>$dishhis,
-            'cmt'=>$usercmt,
-            'created_at'=>(String)$this->created_at,
-            'updated_at'=>(String)$this->updated_at,
+            //'cmt'=>$usercmt,
+            'created_at'=>Carbon::parse($this->created_at)->diffForHumans()."_".Carbon::parse($this->created_at)->getPreciseTimestamp(3),
+            'updated_at'=>Carbon::parse($this->updated_at)->diffForHumans()."_".Carbon::parse($this->updated_at)->getPreciseTimestamp(3),
         ];
     }
 }

@@ -10,7 +10,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
-class DishResources extends JsonResource
+class GetDishEditResources extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -49,6 +49,29 @@ class DishResources extends JsonResource
                 }
             }
         }
+        $st_img="";
+        $s = explode('_',$this->step_imgs);
+        $step = explode('_',$this->steps);
+        $stepCount =count($step);
+        $i=0;
+        foreach($step as $sa){
+            if($sa!='null' && $sa!=''){
+                if($s[$i]!='null' && $s[$i]!=''){
+                    //$type = pathinfo($s[$i],PATHINFO_EXTENSION);
+                    $path = public_path($s[$i]);
+                    $data = file_get_contents($path);
+                    //$base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+					$base64 = base64_encode($data);
+                    $st_img.=$base64.'_';
+                }else{
+                    $st_img.=$s[$i].'_';
+                }
+            }else{
+                break;
+            }
+
+            $i++;
+        }
 
 
         return [
@@ -60,7 +83,7 @@ class DishResources extends JsonResource
             'use'=>$this->use,
             'material'=>$this->material,
             'steps'=>$this->steps,
-            'step_imgs'=>$this->step_imgs,
+            'step_imgs'=>$st_img,
             'author'=>$name,
             'liked_count'=>$this->liked_count,
 			'checked'=>$this->checked,

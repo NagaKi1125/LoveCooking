@@ -80,6 +80,7 @@ Route::get('markets/{id}', 'API\APIMarketController@show');
 //dish
 Route::get('dishes', 'API\APIDishController@index');
 Route::get('dishes/{id}', 'API\APIDishController@show');
+Route::get('dishes-get-edit/{id}', 'API\APIDishController@getEdit');
 
 
 //dishhistory

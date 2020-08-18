@@ -6,6 +6,7 @@ use App\Comment;
 use App\Dish;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\DishResources;
+use App\Http\Resources\GetDishEditResources;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -22,6 +23,11 @@ class APIDishController extends Controller
     {
         $dish = Dish::find($id);
         return new DishResources($dish);
+    }
+    public function getEdit($id)
+    {
+        $dish = Dish::find($id);
+        return new GetDishEditResources($dish);
     }
 
     public function store(Request $request){

@@ -36,7 +36,7 @@ class APIFollowLikedController extends Controller
         $follow = Follow::find($follow_id);
 
         if(strpos($follow->follow_id_list,"_".$fid."_") != false){
-            return response('Already follow this user');
+            
         }else{
             $follow->update([
                 'follow_id_list'=> $follow->follow_id_list.$fid."_",

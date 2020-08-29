@@ -60,7 +60,9 @@
                         <form action="{{ route('admin.dish.delete',[$dish->id]) }}" method="POST">
                             @csrf
                             @method('DELETE')
+                            @if($dish->author == 0)
                             <a class="btn btn-sm btn-warning" href="{{ route('admin.dish.edit',[$dish->id]) }}"><ion-icon name="create"></ion-icon></a>
+                            @endif
                             <button type="submit" class="btn btn-sm btn-danger">
                                 <ion-icon name="trash"></ion-icon>
                             </button>

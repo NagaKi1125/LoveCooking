@@ -61,6 +61,7 @@ class DishResources extends JsonResource
             'material'=>$this->material,
             'steps'=>$this->steps,
             'step_imgs'=>$this->step_imgs,
+			'author_id'=>$this->author,
             'author'=>$name,
             'liked_count'=>$this->liked_count,
 			'checked'=>$this->checked,
